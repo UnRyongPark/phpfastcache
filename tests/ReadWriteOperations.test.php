@@ -40,7 +40,8 @@ foreach ($dirs as $dirIndex => $dir) {
 
         $instances[ $dirIndex ][ $cacheInstanceName ] = CacheManager::getInstance('Files', new FilesConfig([
           'path' => $dir . str_pad($i, 3, '0', STR_PAD_LEFT),
-          'secureFileManipulation' => true
+          'secureFileManipulation' => true,
+          'securityKey' => '_cache',
         ]));
 
         foreach ($keys[ $dirIndex ] as $index => $key) {
@@ -70,7 +71,7 @@ foreach ($dirs as $dirIndex => $dir) {
     for ($i = 1; $i <= 20; $i++) {
         $cacheInstanceName = 'cacheInstance' . $i;
 
-        $testHelper->printText(sprintf('Clearing cache instance %s#%s data', $dir, $cacheInstanceName));
+        $testHelper->printDebugText(sprintf('Clearing cache instance %s#%s data', $dir, $cacheInstanceName));
         $instances[ $dirIndex ][ $cacheInstanceName ]->clear();
     }
 }
